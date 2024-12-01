@@ -16,7 +16,7 @@ def generate_report(irrigation_data):
 
 # Exemple de données d'irrigation
 irrigation_data = {
-    'Region': ['Tunisia1', 'Tunisia2'],
+    'Region': ['Tunisia', 'Sejnane'],
     'Irrigation Need (mm)': [45, 50],
     'Rainfall (mm)': [5, 12],
     'Evapotranspiration Rate (mm)': [3, 2]
