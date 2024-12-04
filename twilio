@@ -1,0 +1,41 @@
+% Paramètres Twilio
+sid = 'ACfa65c9189be400c34d2a7f44edae5a48';          % Votre SID de compte Twilio
+authToken = '2002d3dc8efa04cdd324eddd9be8ff33';     % Votre Token d'authentification Twilio
+fromPhone = '+17755464472';   % Votre numéro Twilio (ex: '+1234567890')
+toPhone = '+216 54042358';       % Numéro du destinataire (ex: '+0987654321')
+
+% Paramètres ThingSpeak
+channelID = 123456;                       % ID de votre canal ThingSpeak
+readAPIKey = 'Y49SLJ1X1KT8PK6B';  % Clé API de lecture de votre canal
+
+% Lisez la dernière valeur du champ de votre canal ThingSpeak
+fieldIndex = 1;  % Numéro du champ (par exemple, 1 pour le champ 1)
+data = thingSpeakRead(channelID, 'Fields', fieldIndex, 'NumPoints', 1, 'ReadKey', readAPIKey);
+
+% Condition : Si la valeur du champ est inférieure à 30
+if data < 30
+    % Message à envoyer via Twilio
+    message = 'Alerte : La valeur de l\'humidité du sol est inférieure à 30%!';
+    
+    % URL de l'API Twilio pour envoyer un SMS
+    url = 'https://api.twilio.com/2010-04-01/Accounts/your_twilio_account_sid/Messages.json';
+    
+    % Paramètres pour envoyer le SMS via Twilio
+    params = struct(...
+        'To', toPhone, ...
+        'From', fromPhone, ...
+        'Body', message ...
+    );
+    
+    % Encodez les paramètres et créez la requête HTTP
+    options = weboptions('ContentType', 'json', 'Username', sid, 'Password', authToken);
+    
+    % Envoyez la requête POST à l'API Twilio
+    response = webwrite(url, params, options);
+    
+    % Afficher la réponse de l'API Twilio
+    disp('SMS envoyé');
+    disp(response);
+else
+    disp('Aucune alerte. La condition n\'est pas remplie.');
+end
