@@ -14,10 +14,10 @@ ee.Initialize()
 # Définir la zone d'intérêt (exemple : Tunisie, vous pouvez ajuster les coordonnées)
 region = ee.Geometry.Rectangle([9.5, 37.5, 10, 37.7])
 
-# Récupérer les données Sentinel-2 pour 2023
+# Récupérer les données Sentinel-2 pour 2024
 sentinel2 = ee.ImageCollection('COPERNICUS/S2') \
     .filterBounds(region) \
-    .filterDate('2023-01-01', '2023-12-31') \
+    .filterDate('2023-01-01', '2024-12-7') \
     .select(['B4', 'B3', 'B2', 'B8'])  # Rouge, Vert, Bleu, Infra-Rouge
 
 # Calculer l'indice de végétation NDVI
