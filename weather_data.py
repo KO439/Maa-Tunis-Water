@@ -2,7 +2,7 @@ import requests
 import numpy as np
 
 # Clé API OpenWeatherMap (ne jamais exposer la clé directement dans le code en production)
-api_key = 'VOTRE_CLE_API'  # Remplacez par votre clé API personnelle
+api_key = 'AE4LJ1X1KT8PK6B'  # Remplacez par votre clé API personnelle
 
 # Fonction pour récupérer les données météo
 def get_weather_data(lat, lon, api_key):
